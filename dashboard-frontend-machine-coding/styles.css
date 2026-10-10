@@ -28,7 +28,11 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(ellipse at 93% 0%, rgba(225, 219, 255, 0.42), transparent 31rem),
+    radial-gradient(
+      ellipse at 93% 0%,
+      rgba(225, 219, 255, 0.42),
+      transparent 31rem
+    ),
     var(--canvas);
 }
 
@@ -54,12 +58,6 @@ select {
 .list-header,
 .question-top,
 .question-bottom,
-.page-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .page-header {
   gap: 24px;
   margin-bottom: 30px;
@@ -328,7 +326,9 @@ h1 {
   color: #fff;
   font-size: 0.82rem;
   font-weight: 700;
-  transition: background 150ms ease, transform 150ms ease;
+  transition:
+    background 150ms ease,
+    transform 150ms ease;
 }
 
 .primary-button:hover {
@@ -546,13 +546,6 @@ h1 {
   line-height: 1.5;
 }
 
-.page-footer {
-  gap: 14px;
-  padding: 20px 2px 0;
-  color: #9296a7;
-  font-size: 0.72rem;
-}
-
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -651,11 +644,5 @@ h1 {
   .status-select {
     max-width: 120px;
     font-size: 0.67rem;
-  }
-
-  .page-footer {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 6px;
   }
 }

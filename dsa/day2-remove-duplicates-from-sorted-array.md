@@ -38,20 +38,23 @@ Then I move `i` forward and copy `nums[j]` there.
 
 ```js
 function removeDuplicates(nums) {
-  if (nums.length === 0) {
-    return 0;
-  }
+ // ### two pointer
+    let j = 0;
+    let res = 1;
+    let i = 1;
 
-  let i = 0;
-
-  for (let j = 1; j < nums.length; j++) {
-    if (nums[j] !== nums[i]) {
-      i++;
-      nums[i] = nums[j];
+    while(i < nums.length){
+        if(nums[i] === nums[j]){
+            i++;
+            continue;
+        }else{
+            j++;
+            nums[j] = nums[i];
+            i++;
+            res++;
+        }
     }
-  }
-
-  return i + 1;
+    return res;
 }
 ```
 

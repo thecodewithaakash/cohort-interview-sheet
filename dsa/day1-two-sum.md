@@ -57,22 +57,17 @@ For an interview, I would prefer this because we only need to go through the arr
 ## JavaScript Solution
 
 ```js
-function twoSum(nums, target) {
+var twoSum = function(nums, target) {
     const map = new Map();
-
-    for (let i = 0; i < nums.length; i++) {
-        const current = nums[i];
-        const needed = target - current;
-
-        if (map.has(needed)) {
-            return [map.get(needed), i];
+    for(let i = 0;i<nums.length;i++){
+        const complement = target - nums[i];
+        if(map.has(complement)){
+            return [map.get(complement), i ]
         }
-
-        map.set(current, i);
+        map.set(nums[i],i);
     }
-
     return [];
-}
+};
 ```
 
 ### Dry Run

@@ -66,47 +66,33 @@ b + c = -a
 ## Code
 
 ```js
-function threeSum(nums) {
-  const result = [];
+var threeSum = function(nums) {
+    nums = nums.sort((a, b) => a - b);
 
-  nums.sort((a, b) => a - b);
-
+  let arr = [];
+  
   for (let i = 0; i < nums.length - 2; i++) {
-    // Skip duplicate first numbers
-    if (i > 0 && nums[i] === nums[i - 1]) {
-      continue;
-    }
-
-    let left = i + 1;
+    let left = i +  1;
     let right = nums.length - 1;
-
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
     while (left < right) {
-      const sum = nums[i] + nums[left] + nums[right];
-
-      if (sum === 0) {
-        result.push([nums[i], nums[left], nums[right]]);
-
-        // Skip duplicate values
-        while (left < right && nums[left] === nums[left + 1]) {
-          left++;
-        }
-
-        while (left < right && nums[right] === nums[right - 1]) {
-          right--;
-        }
-
+      let sum = nums[i] + nums[left] + nums[right];
+      if(sum === 0){
+      arr.push([nums[i], nums[left], nums[right]]);
         left++;
         right--;
-      } else if (sum < 0) {
+        while (left < right && nums[left] === nums[left - 1]) left++;
+        while (left < right && nums[right] === nums[right + 1]) right--;
+      }else if(sum < 0){
         left++;
-      } else {
+      }else{
         right--;
       }
     }
   }
 
-  return result;
-}
+  return arr;
+};
 ```
 
 ---
@@ -115,7 +101,7 @@ function threeSum(nums) {
 
 The easiest solution that comes to mind is **three nested loops**:
 
-```
+```js
 for (let i = 0; i < nums.length; i++) {
     for (let j = i + 1; j < nums.length; j++) {
         for (let k = j + 1; k < nums.length; k++) {

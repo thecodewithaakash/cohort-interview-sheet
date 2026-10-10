@@ -34,16 +34,25 @@ I will use one pointer called `nonZero`.
 ### Code
 
 ```js
-function moveZeroes(nums) {
-  let nonZero = 0;
-
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] !== 0) {
-      [nums[i], nums[nonZero]] = [nums[nonZero], nums[i]];
-      nonZero++;
+var moveZeroes = function(arr) {
+  let j = 0;
+  let i = 1;
+  while(i < arr.length){
+    if(arr[j] === 0 && arr[i] !== 0){
+        let temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
+        i++;
+        j++;
+    }else if(arr[j] !== 0 && arr[i] === 0){
+        j++;
     }
-  }
-}
+    else {
+        i++;
+    }
+   }
+   return arr;
+};
 ```
 
 ---
