@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f6fa">
+    <title>Kanban Task Board</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">WEEK 02 · MACHINE CODING</p>
+          <h1>Kanban Task Board</h1>
+          <p class="intro">Capture tasks, set priorities, and move work across your board.</p>
+        </div>
+        <span class="board-tag">3 workflow stages</span>
+      </header>
+
+      <section class="workspace" aria-label="Task board controls and tasks">
+        <aside class="form-panel">
+          <div class="section-heading">
+            <p class="eyebrow">TASK DETAILS</p>
+            <h2 id="form-heading">Add a task</h2>
+          </div>
+          <form id="task-form" novalidate>
+            <label for="task-title">Title <span aria-hidden="true">*</span></label>
+            <input id="task-title" name="title" type="text" maxlength="100" required>
+
+            <label for="task-description">Description</label>
+            <textarea id="task-description" name="description" rows="4" maxlength="500"></textarea>
+
+            <div class="form-row">
+              <div>
+                <label for="task-priority">Priority</label>
+                <select id="task-priority" name="priority">
+                  <option value="Low">Low</option>
+                  <option value="Medium" selected>Medium</option>
+                  <option value="High">High</option>
+                </select>
+              </div>
+              <div>
+                <label for="task-due-date">Due date</label>
+                <input id="task-due-date" name="dueDate" type="date">
+              </div>
+            </div>
+
+            <p class="field-error" id="form-error" role="alert"></p>
+            <div class="form-actions">
+              <button class="primary-button" id="submit-button" type="submit">Add task</button>
+              <button class="secondary-button" id="cancel-edit" type="button" hidden>Cancel</button>
+            </div>
+          </form>
+        </aside>
+
+        <section class="board-panel" aria-labelledby="board-heading">
+          <div class="board-toolbar">
+            <div class="section-heading">
+              <p class="eyebrow">YOUR WORKSPACE</p>
+              <h2 id="board-heading">Tasks <span class="task-count" id="task-count">0</span></h2>
+            </div>
+            <label class="search-control">
+              <span class="visually-hidden">Search task titles</span>
+              <input id="task-search" type="search" placeholder="Search tasks">
+            </label>
+          </div>
+
+          <div class="filters" aria-label="Filter tasks">
+            <label>
+              <span class="visually-hidden">Filter by priority</span>
+              <select id="priority-filter">
+                <option value="All">All priorities</option>
+                <option value="High">High priority</option>
+                <option value="Medium">Medium priority</option>
+                <option value="Low">Low priority</option>
+              </select>
+            </label>
+            <label>
+              <span class="visually-hidden">Filter by status</span>
+              <select id="status-filter">
+                <option value="All">All statuses</option>
+                <option value="Todo">Todo</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </label>
+          </div>
+
+          <p class="storage-message" id="storage-message" role="status" hidden></p>
+          <p class="board-empty" id="board-empty" hidden></p>
+          <div class="board" id="board">
+            <section class="column" data-status="Todo" aria-labelledby="todo-heading">
+              <header class="column-header">
+                <h3 id="todo-heading">Todo</h3>
+                <span class="column-count" data-count="Todo">0</span>
+              </header>
+              <div class="task-list" data-list="Todo"></div>
+            </section>
+            <section class="column" data-status="In Progress" aria-labelledby="progress-heading">
+              <header class="column-header">
+                <h3 id="progress-heading">In Progress</h3>
+                <span class="column-count" data-count="In Progress">0</span>
+              </header>
+              <div class="task-list" data-list="In Progress"></div>
+            </section>
+            <section class="column" data-status="Completed" aria-labelledby="completed-heading">
+              <header class="column-header">
+                <h3 id="completed-heading">Completed</h3>
+                <span class="column-count" data-count="Completed">0</span>
+              </header>
+              <div class="task-list" data-list="Completed"></div>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
