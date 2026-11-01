@@ -9,21 +9,63 @@ Search for `target` in a rotated ascending array of distinct values. Return its 
 At each midpoint, at least one half remains sorted. Determine which half is sorted and whether the target lies within its bounds; discard the other half.
 
 ```js
-function search(nums, target) {
-  let left = 0;
-  let right = nums.length - 1;
+ 
+var search = function (nums, target) {
+ const pivot = findPivot(nums);
 
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-    if (nums[mid] === target) return mid;
+  // if you did not find a pivot, it means the array is not rotated.
+  if (pivot === -1) {
+    // just do normal binarySearch
+    return binarySearch(nums, target, 0, nums.length - 1);
+  }
 
-    if (nums[left] <= nums[mid]) {
-      if (nums[left] <= target && target < nums[mid]) right = mid - 1;
-      else left = mid + 1;
-    } else if (nums[mid] < target && target <= nums[right]) {
-      left = mid + 1;
+  // if pivot is found, you have found 2 ascending sorted arrays
+  if (nums[pivot] === target) { // case 1:
+    return pivot;
+  }
+
+  if (target >= nums[0]) { // case 2:
+    return binarySearch(nums, target, 0, pivot - 1);
+  }
+
+  // case 3:
+  return binarySearch(nums, target, pivot + 1, nums.length - 1);
+};
+
+function findPivot(arr) {
+  let start = 0;
+  let end = arr.length - 1;
+
+  while (start <= end) {
+    let mid = start + Math.floor((end - start) / 2);
+    if (mid < end && arr[mid] > arr[mid + 1]) {
+      return mid;
+    }
+    if (mid > start && arr[mid] < arr[mid - 1]) {
+      return mid - 1;
+    }
+
+    if (arr[mid] <= arr[start]) {
+      end = mid - 1;
     } else {
-      right = mid - 1;
+      start = mid + 1;
+    }
+  }
+
+
+  return -1;
+}
+
+
+function binarySearch(arr, target, start, end) {
+  while (start <= end) {
+    let mid = Math.floor(start + (end - start) / 2);
+    if (target < arr[mid]) {
+      end = mid - 1;
+    } else if (target > arr[mid]) {
+      start = mid + 1;
+    } else {
+      return mid; // ans found
     }
   }
 
